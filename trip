@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <scriptsrc="https://ajax.googleapis.com/ajax/libs/d3js/6.3.1/d3.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        ul{
+        padding:0;
+      }
+        html, body{
+            padding-top:10px;
+            margin:0px;
+            width: 100%;
+            height: 100%;
+        }
+        .top{
+            text-align: center;
+        }
+        
+        .slide ul li{
+            list-style:none;
+            overflow: hidden;
+        }
+        .slide{
+            padding:0px;
+            margin:0px;
+            display: inline-block;
+            width: 320px;
+            height: 400px;
+            overflow: hidden;
+        }
+        .slide ul{width:calc(320px * 4);display:flex;animation:slide 8s infinite;} /* slide를 8초동안 진행하며 무한반복 함 */
+    .slide li{width:calc(320px);height:400px;}
+    .slide li:nth-child(1){background-image: url(../../static/image/ljh/1.jpg);background-repeat: no-repeat;background-size: 100% 100%;}
+    .slide li:nth-child(2){background-image: url(../../static/image/ljh/incantation-5337079_1920.jpg);background-repeat: no-repeat;background-size: 100% 100%;}
+    .slide li:nth-child(3){background-image: url(../../static/image/ljh/photo-1602179593540-c5a44c5fef6d.jpg);background-repeat: no-repeat;background-size: 100% 100%;}
+    .slide li:nth-child(4){background-image: url(../../static/image/ljh/lights-in-a-glas-5146088_1920.jpg);background-repeat: no-repeat;background-size: 100% 100%;}
+    @keyframes slide {
+      0% {margin-left:0px} /* 0 ~ 10  : 정지 */
+      10% {margin-left:0px} /* 10 ~ 25 : 변이 */
+      25% {margin-left:-320px;} /* 25 ~ 35 : 정지 */
+      35% {margin-left:-320px;} /* 35 ~ 50 : 변이 */
+      50% {margin-left:-640px;}
+      60% {margin-left:-640px;}
+      75% {margin-left:-960px;}
+      85% {margin-left:-960px;}
+      100% {margin-left:0px;}
+    }
+
+        .back{
+           width:30px;
+           height: 30px; 
+           background-image: url(../../static/image/ljh/back2.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+           z-index: 1;
+        }
+        .here{
+            text-align: left;
+            margin-left: 25px;
+        }
+        .here div{
+            display: inline-block;
+            position: relative;
+            left:0; 
+            font-size: 18px;
+        }
+        .hereicon{
+            position: relative;
+            top:15px;
+            width: 20px;
+            height: 30px;
+            background: url(../../static/image/ljh/here1.png);
+            background-repeat: no-repeat;background-size: 100% 100%;
+            display: inline-block;
+        }
+        .go{
+            width:15px;
+            height: 15px;
+            background-image: url(../../static/image/ljh/next.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+            display: inline-block;
+        }
+        .title{
+            text-align: center;
+            font-size: 36px;
+        }
+        .subicon{ 
+            text-align: left;
+            margin-left: 25px;
+        }
+        .subicon div{
+            display: inline-block;
+        }
+        .ministar, .minipidback{
+            width:30px;
+            height: 30px;}
+
+        .ministar{
+            background-image: url(../../static/image/ljh/star.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+        }
+        .minipidback{
+            background-image: url(../../static/image/ljh/feedback.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%; 
+        }
+        .price{
+            text-align: right;
+            margin-right: 25px;   
+        }
+
+        .price li {
+            float:right; list-style:none;
+            font-size: 26px; 
+        }
+        .price span{
+            font-size: 18px;
+            font-family: 'OpenSans-SemiBold'; 
+        }
+        
+        .notic{
+            text-align: left;
+            list-style: none;
+            padding:0;
+            margin-left: 25px;
+        }
+        .notic li{
+            margin-left: 25px;
+        }
+        .notic li div{
+            width:30px;
+            height: 30px;
+            display: inline-block;   
+        }
+        .notic1{
+            background-image: url(../../static/image/ljh/ticket.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%; 
+        }
+        .notic2{
+            background-image: url(../../static/image/ljh/user2.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%; 
+        }
+        .notic3{
+            background-image: url(../../static/image/ljh/home2.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%; 
+        }
+        .notic4{
+            background-image: url(../../static/image/ljh/language.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%; 
+        }
+        .tip span{
+            text-align: left;
+            margin-left: 25px;
+        }
+        
+        .tipbox{
+            width: 280px;   
+            margin-left: 25px;
+        }
+        .tipbox ul{
+            text-align: center;
+            border-radius: 8%;
+            border:1px #707070 solid; 
+            -webkit-box-shadow: 2px 3px 8px #eee;
+-moz-box-shadow: 2px 3px 8px #eee;
+box-shadow: 2px 3px 8px #eee; 
+        }
+        .tipbox ul li{
+            list-style:none;
+            padding:5px 5px 6px 0px;
+            display: inline-block;
+        }
+        
+        .rivewicon {
+            text-align: center;
+            }
+        .rivew span{
+            text-align: left;
+            margin-left: 25px;
+        }
+        .ristar{
+            width:65px;
+            height: 65px;
+            background-image: url(../../static/image/ljh/star.jpg);
+           background-repeat: no-repeat;background-size: 80% 80%;
+            display: inline-block;
+        }
+        .ricount{
+            width:65px;
+            height: 65px;
+            font-size: 36px;
+            display: inline-block;
+        }
+        .richart{
+            width:70px;
+            height: 65px;
+            background-image: url(../../static/image/ljh/chart.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+            font-size: 36px; 
+            display: inline-block;   
+        }
+        .ritext{
+            width: 280px;
+            height: 150px;
+            background-image: url(../../static/image/ljh/t.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+            display: inline-block;
+        }
+        .btn{
+            text-align: center;
+        }
+        .allveiw{
+            width: 270px;
+            height: 55px;
+            display: inline-block;
+            margin-top: 17px;
+            
+        }
+        .fake{
+             background-image: url(../../static/image/ljh/fake.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+        }
+        .pr{
+            text-align: center;
+        }
+        .prdouct span{
+            text-align: left;
+            margin-left: 25px;
+        }
+        .pr-p{
+            width: 300px;
+            height: 500px;
+            background-image: url(../../static/image/ljh/prp.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+            display: inline-block;
+        }
+        .hidden-p{
+            width: 300px;
+            height: 2600px;
+            background-image: url(../../static/image/ljh/hidden.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+            display: none;
+            display:inline-block;
+        }
+        .control{
+            background-image: url(../../static/image/ljh/control.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+        }
+        .guide span{
+            text-align: left;
+            margin-left: 25px;
+        }
+        .map{
+            text-align: center;
+        }
+        .map-p{
+            width: 280px;
+            height: 230px;
+            background-image: url(../../static/image/ljh/map2.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+            display: inline-block;
+        }
+        .guide ul{
+            text-align: center;
+        }
+        .g-text ul li{
+            list-style-type: "-";
+            padding:5px 5px 6px 0px;
+        }
+        .ceck-in, .ceck-out{
+            margin-top: 5px;
+            display: inline-block;
+            font-size: 17px;
+        }
+        .ceck-in{
+            width: 150px;
+            height: 65px;
+            border: 1px #707070 solid;
+            -webkit-box-shadow: 2px 3px 8px #eee;
+-moz-box-shadow: 2px 3px 8px #eee;
+box-shadow: 2px 3px 8px #eee;
+border-radius:8%;
+        }
+        .ceck-out{
+            width: 110px;
+            height: 25px;
+            border: 1px #707070 solid;
+            -webkit-box-shadow: 2px 3px 8px #eee;
+-moz-box-shadow: 2px 3px 8px #eee;
+box-shadow: 2px 3px 8px #eee;
+border-radius:8%;
+        }
+        .refund span{
+            text-align: left;
+            margin-left: 25px;
+        }
+        .refund ul{
+            padding-bottom: 5px;
+        }
+        .refund ul li{
+            list-style-type: "-";
+            padding:5px 5px 6px 0px;
+        }
+        .agency span{
+            text-align: left;
+            margin-left: 25px;
+        }
+        .face{
+            text-align: center;
+        }
+        .face div{
+            display: inline-block;
+        }
+        .myface{
+            width: 80px;
+            height: 80px;
+            background-image: url(../../static/image/ljh/myface.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+        }
+        .question{
+            background-image: url(../../static/image/ljh/qu.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+        }
+        .a-t ul li{
+            list-style: none;
+        }
+        .test span{
+            text-align: left;
+            margin-left: 25px; 
+        }
+        .tarocard{
+            text-align: center;
+            margin-top: 15px;
+        }
+        .taro{
+            width: 260px;
+            height: 220px;
+            background-image: url(../../static/image/ljh/taro.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+            display: inline-block;
+        }
+       
+        .card{
+            text-align: center;
+        }
+        .bar{
+            display: inline-block;
+            width: 230px;
+            height:50px;
+            border:1px #707070 solid;
+            -webkit-box-shadow: 2px 3px 8px #eee;
+-moz-box-shadow: 2px 3px 8px #eee;
+box-shadow: 2px 3px 8px #eee;
+            background-image: url(../../static/image/ljh/bar2.jpg);
+           background-repeat: no-repeat;background-size: 95% 90%;
+            border-radius:50px;
+            position: relative;
+            }
+
+        .point{
+        width: 50px;
+        height: 50px;
+        border:1px #707070 solid;
+        border-radius:50%;
+        position: absolute;
+
+        background:rgb(111, 111, 216);
+        }
+        
+        .left{
+        left:0;
+        }
+        .right{
+        right:0;
+        }
+        .rivewicon>div{
+        vertical-align:middle
+         }
+         .nevi{
+             z-index: 2;
+             position: fixed;
+             top:0;
+             left:0;
+             background-color: white;
+             width: 100%;
+             height: 50px;
+             border-bottom: solid 2px (#707070);
+             -webkit-box-shadow: 2px 3px 8px #eee;
+-moz-box-shadow: 2px 3px 8px #eee;
+box-shadow: 2px 3px 8px #eee;
+         }
+         .nevi ul{
+             background-color: white;
+             list-style-type: none;
+             margin:0;
+             padding:0;
+             overflow : hidden;
+         }
+         .nevi li{
+             float: left;
+             font-size: 17px;
+             padding: 13px 5px 5px 13px;
+             
+         }
+         .nevi li a{
+             display: block;
+             background-color: white;
+             color:#8D6D6D;
+             text-decoration: none;
+             text-align: center;
+         }
+         .nevi li a:hover{
+             color:#0D064B;
+             width: 50px;
+             height: 1px;
+             display: block;
+             border-bottom: 1px solid #C01EEF; 
+         }
+         .nevi li a:hover:after{
+            color:#0D064B;
+             width: 50px;
+             height: 1px;
+            display: block;
+             border-bottom: 1px solid #C01EEF;
+         }
+         .talk{
+            text-align: center;
+         }
+         .talk ul{
+            text-decoration: none;
+            text-align: center;
+         }
+         .talk li{
+            list-style: none;
+            display:inline-block; 
+         }
+         .talk li:first-child{
+            width: 280px;
+            height: 230px;
+            background-image: url(../../static/image/ljh/talk1.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+         }
+         .talk li:nth-child(2){
+            width: 280px;
+            height: 230px;
+            background-image: url(../../static/image/ljh/talk2.jpg);
+           background-repeat: no-repeat;background-size: 100% 100%;
+            
+         }
+         .center{
+            -webkit-box-shadow: 2px 3px 8px #eee;
+-moz-box-shadow: 2px 3px 8px #eee;
+box-shadow: 2px 3px 8px #eee;
+         }
+         .nextbar{
+            -webkit-box-shadow: 2px 3px 8px #eee;
+-moz-box-shadow: 2px 3px 8px #eee;
+box-shadow: 2px 3px 8px #eee;
+         }
+        
+
+      
+         
+    </style>
+    <style type="text/css">
+        .here>div {font-family: 'Open Sans', sans-serif;font-size: 16px;}
+        .h1{font-family: 'Open Sans', sans-serif;font-size: 35px; font-weight: bold;}
+        .subicon{font-family: 'Open Sans', sans-serif;font-size: 16px; font-weight: bolder;}
+        .price>div{font-family: 'Open Sans', sans-serif;font-size: 20px;font-weight: bold;}
+        .miniprice{font-family: 'Open Sans', sans-serif;font-size: 16px;}
+        .notice>li{font-family: 'Open Sans', sans-serif;font-size:20px;}
+        .tip>span{font-family: 'Open Sans', sans-serif;font-size: 22px;font-weight: bolder;}
+        .rivew>span{font-family: 'Open Sans', sans-serif;font-size: 22px;font-weight: bolder;}
+        .prdouct>span{font-family: 'Open Sans', sans-serif;font-size: 22px;font-weight: bolder;}
+        .guide>span{font-family: 'Open Sans', sans-serif;font-size: 22px;font-weight: bolder;}
+        .refund>span{font-family: 'Open Sans', sans-serif;font-size: 22px;font-weight: bolder;}
+        .agency>span{font-family: 'Open Sans', sans-serif;font-size: 22px;font-weight: bolder;}
+        .test>span{font-family: 'Open Sans', sans-serif;font-size: 22px;font-weight: bolder;}
+        .tipbox>ul>li{font-family: 'Open Sans', sans-serif;font-size: 18px;}
+        .g-text>ul>li{font-family: 'Open Sans', sans-serif;font-size: 18px;}
+        .r-text>ul{font-family: 'Open Sans', sans-serif;font-size: 18px;font-weight: bolder;}
+        .r-text>ul>li{font-family: 'Open Sans', sans-serif;font-size: 18px;font-weight: normal;}
+        .face>div{font-family: 'Open Sans', sans-serif;font-size: 20px;font-weight: bolder;}
+        .a-t>ul>li{font-family: 'Open Sans', sans-serif;font-size: 18px;font-weight: normal;}
+        .redtext{font-family: 'Open Sans', sans-serif;font-size: 18px; color: darkred;}
+        .nevi li{font-family: 'Open Sans', sans-serif;font-size: 17px;}
+    </style>
+ <script>
+    $(document).ready(function(){
+        $('.fake').click(function(){
+            alert("준비중 입니다");
+        })
+
+        $('.bar').click(function(){
+            console.log('sfd')
+            $('.point').toggleClass('right')
+            
+            /*if('.pointer'='right'){
+                $('.harry').hide()
+                $('.totoro').show()}
+            else{$('.totoro').hide()
+                    $('.harry').show()}*/
+        })
+
+        $(".control").click(function(){
+            if($('.hidden-p').css("display")=="none"){
+            $('.hidden-p').show();}
+           else{ $(".hidden-p").hide();}
+        })
+        
+        $('.question').click(function(){
+            alert("준비중 입니다");
+        })
+
+        var vi = $('.prdouct').scrollTop;
+
+       /* $(window).scroll(function(){
+            var num =$(Window).scrollTop();
+            if (num>vi){
+                $('.nevi').fadeln();
+            }else{
+                $('.nevi').fadeOut();
+            }
+        })
+       */
+    
+
+        
+    })
+    </script>
+
+
+    
+
+</head>
+<body>
+<div class="all">
+
+<div class="top">
+    <div class="back"></div>
+    <div class="slide">
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    </div>
+</div>
+
+<div class="here">
+    <div class="hereicon"></div>
+     <div>대한민국</div>
+     <div class="go"></div>
+    <div>서울</div>
+</div>
+
+<h1 class="title">덕질하며 힐링하자</h1>
+
+<div class="subicon">
+    <div class="ministar"></div>
+    4.8
+    <div class="go"></div>
+    </br>
+    <div class="minipidback"></div>
+    138
+    <div class="go"></div>
+</div>
+
+<div class="price">
+ <ul>
+    <span  class="miniprice">원가</span>
+    &emsp;
+    <li><del>100,000원</del></li>
+    <p></p>
+    <span  class="miniprice">인당</span>
+    &emsp;
+    <li>70,000원</li>
+ </ul>
+</div>
+
+<hr align="center"
+class="nextbar" 
+style="border: solid 1px (#707070); 
+width: 80%; 
+margin-top:30px; 
+margin-bottom:30px;"></hr>
+
+<ul class="notic">
+    <li>
+        <div class="notic1"></div>
+        &nbsp;&nbsp;모바일 바우처
+    </li>
+    &emsp;
+    <li>
+        <div class="notic2"></div>
+        &nbsp;&nbsp; 인원 2~4 명
+    </li>
+    &emsp;
+    <li>
+        <div class="notic3"></div>
+        &nbsp;&nbsp;숙소 제공
+    </li>
+    &emsp;
+    <li>
+        <div class="notic4"></div>
+        &nbsp;&nbsp;한국어 지원
+    </li>
+</ul>
+
+<hr align="center"
+class="nextbar" 
+style="border: solid 1px (#707070); 
+width: 80%; 
+margin-top:30px; 
+margin-bottom:30px;"></hr>
+
+<div class="tip">
+    <span>매력&nbsp;포인트</span>
+    <div class="tipbox">
+        <ul>
+            <li>&nbsp;지친&nbsp;어른이들&nbsp;취향&nbsp;저격</li>
+            <li>&nbsp;한국에서&nbsp;즐기는&nbsp;색다른&nbsp;여행</li>
+            <li>&nbsp;내가&nbsp;몰랐던&nbsp;서울</li>
+            <li>&nbsp;나만의&nbsp;굿즈&nbsp;(공방&nbsp;체험)</li>
+            <li>&nbsp;올&nbsp;무비타임&nbsp;&&nbsp;보드게임</li>
+        </ul>
+    </div>
+</div>
+
+<hr align="center"
+class="nextbar" 
+style="border: solid 1px (#707070); 
+width: 80%; 
+margin-top:30px; 
+margin-bottom:30px;"></hr>
+
+<div class="rivew">
+    <span>리뷰</span>
+    <p></p>
+    <div class="rivewicon">
+        <div class="ristar"></div>
+        <div class="ricount">4.8</div>
+        <div class="richart"></div>
+        <p></p>
+        <div class="ritext"></div>
+    </div>
+    <div class="btn">
+        <div class="allveiw fake"></div>
+     </div>
+</div>
+
+
+
+<hr align="center"
+class="nextbar" 
+style="border: solid 1px (#707070); 
+width: 80%; 
+margin-top:30px; 
+margin-bottom:30px;"></hr>
+
+<div class="nevi">
+    <ul>
+       <li><a href="#prdouct">상품소개</a></li>
+       <li><a href="#guide">이용안내</a></li> 
+       <li><a href="#refund">취소/환불</a></li> 
+       <li><a href="#agency">여행사</a></li> 
+       <li><a href="#test">맛보기</a></li> 
+    </ul>
+
+
+</div>
+
+
+
+
+
+<div class="prdouct">
+    <span><a name="prdouct">상품소개</a></span>
+    <p></p>
+    <div class="pr">
+     <div class="pr-p"></div>
+     <div class="hidden-p"></div>
+    </div>
+    <div class="btn">
+        <div class="allveiw control"></div>
+     </div>
+</div>
+
+<hr align="center"
+class="nextbar" 
+style="border: solid 1px (#707070); 
+width: 80%; 
+margin-top:30px; 
+margin-bottom:30px;"></hr>
+
+<div class="guide">
+    <span><a name="guide">이용안내</a></span>
+    <p></p>
+    <div class="map">
+        <div class="map-p"></div>
+    </div>
+    <div class="g-text">
+        <ul>
+            <li>&nbsp;숙소의&nbsp;정확한&nbsp;위치는&nbsp;예약&nbsp;후&nbsp;확인</li>
+            <li>&nbsp;최소&nbsp;2일&nbsp;전&nbsp;구매/변경&nbsp;가능</li>
+            <li>&nbsp;식비&nbsp;및&nbsp;경비&nbsp;미포함</li>
+            <li>&nbsp;구비된&nbsp;물품&nbsp;손상&nbsp;/&nbsp;파손&nbsp;/&nbsp;분실&nbsp;시&nbsp;손해배상</li>
+            <li>&nbsp;앱을&nbsp;통한&nbsp;퀘스트,&nbsp;알림&nbsp;ON</li>
+            <li>&nbsp;단체&nbsp;예약은&nbsp;'문의하기'로</li>
+        </ul>
+        <ul class="ceck">
+            <li>&nbsp;체크인</li>
+            <div class="ceck-in">&nbsp;평일&nbsp;13:00&nbsp;-&nbsp;22:00<p></p>&nbsp;주말&nbsp;15:00&nbsp;-&nbsp;22:00</div>
+            <p> </p>
+            <li>&nbsp;체크아웃</li>
+            <div class="ceck-out">&nbsp;09:00&nbsp;-&nbsp;11:00</div>
+        </ul>
+    </div>
+
+    <hr align="center"
+    class="nextbar" 
+style="border: solid 1px (#707070); 
+width: 80%; 
+margin-top:30px; 
+margin-bottom:30px;"></hr>
+
+<div class="refund">
+    <span><a name="refund">취소/환불</a></span>
+    <p></p>
+    <div class="r-text">
+        <ul> 취소
+            <li>&nbsp;최소&nbsp;4일&nbsp;전까지&nbsp;가능</li>
+            <li>&nbsp;미사용은&nbsp;취소&nbsp;및&nbsp;환불&nbsp;불가</li>
+            <li>&nbsp;사용한&nbsp;티켓&nbsp;환불&nbsp;불가</li>
+        </ul>
+        <ul> 환불
+            <li>&nbsp;7일&nbsp;전&nbsp;전액&nbsp;환불</li>
+            <li>&nbsp;5일&nbsp;전&nbsp;80%&nbsp;환불</li>
+            <li>&nbsp;4일&nbsp;전&nbsp;70%&nbsp;환불</li>
+            <li>&nbsp;이후&nbsp;환불&nbsp;불가능&nbsp;</li>
+            <p></p><p></p>
+            <li class="redtext">&nbsp;취소&nbsp;및&nbsp;환불은&nbsp;"문의하기"&nbsp;이용</li>
+        </ul>
+    </div>
+
+    <hr align="center"
+    class="nextbar" 
+style="border: solid 1px (#707070); 
+width: 80%; 
+margin-top:30px; 
+margin-bottom:30px;"></hr>
+
+<div class="agency">
+<span><a name="agency">여행사</a></span>
+<p></p>
+<div class="face">
+     <div class="myface"></div>
+     <div>[덕성감성]&nbsp;이지현</div>
+    <div class="a-t">
+        <ul>
+            <li>안녕하세요,&nbsp;삶의&nbsp;즐거움을&nbsp;기획하는
+                <p></p>[덕성감성]&nbsp;이지현&nbsp;입니다.
+                <p></p>여행의&nbsp;시작부터&nbsp;끝&nbsp;그리고&nbsp;그후까지,
+                <p></p>만족스럽고&nbsp;깔끔한&nbsp;여행을&nbsp;선물합니다.
+                <p></p>현재는&nbsp;서울&nbsp;투어를&nbsp;진행하고&nbsp;있습니다.</li>
+        </ul>
+    </div>
+    <div class="btn">
+        <div class="allveiw question"></div>
+     </div>
+</div>
+
+</div>
+
+<hr align="center"
+class="nextbar" 
+style="border: solid 1px (#707070); 
+width: 80%; 
+margin-top:30px; 
+margin-bottom:30px;"></hr>
+
+<div class="test">
+    <p></p>
+    <span><a name="test">맛보기</a></span>
+    <div class="card">
+        <div class="tarocard">
+            <div class="taro"></div>
+        </div>
+        <div class="bar">
+            <div class="point"></div>
+        </div>
+        <div class="talk">
+            <ul>
+                <li class="harry"></li>
+                <li class="totoro"></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<hr align="center"
+class="nextbar" 
+style="border: solid 1px (#707070); 
+width: 80%; 
+margin-top:30px; 
+margin-bottom:30px;"></hr>
+
+
+
+
+
+
+
+
+</div>
+
+</body>
+</html>
